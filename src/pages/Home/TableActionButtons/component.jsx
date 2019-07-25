@@ -5,13 +5,13 @@ import ActionButtons from './styles'
 
 class TableActionsButtons extends PureComponent {
   handleClickEditBtn = () => {
-    const { goToEditPage, itemId } = this.props
+    const { goToEditPage, articleId } = this.props
 
-    goToEditPage(itemId)
+    goToEditPage(articleId)
   };
 
   render () {
-    const { itemId, handleDeleteClick } = this.props
+    const { articleId, handleDeleteClick } = this.props
     return (
       <ActionButtons>
         <Button type="primary" onClick={this.handleClickEditBtn}>
@@ -19,7 +19,7 @@ class TableActionsButtons extends PureComponent {
         </Button>
         <Button
           type="danger"
-          data-id={itemId}
+          data-id={articleId}
           onClick={handleDeleteClick}
         >
           Delete
@@ -31,7 +31,7 @@ class TableActionsButtons extends PureComponent {
 
 TableActionsButtons.propTypes = {
   goToEditPage: PropTypes.func.isRequired,
-  itemId: PropTypes.number.isRequired,
+  articleId: PropTypes.number.isRequired,
   handleDeleteClick: PropTypes.func.isRequired,
 }
 

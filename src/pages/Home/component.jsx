@@ -1,20 +1,25 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { columns } from './tableConfig'
-import { Table } from 'antd'
 
 import { HomePageWrapper } from './styles'
+import ArticlesTable from './ArticlesTable'
 
 class Home extends PureComponent {
   render () {
     return (
       <HomePageWrapper>
-        <Table
-          columns={columns}
-          dataSource={this.props.articles} />
+        <ArticlesTable
+          articles={this.props.articles}
+          goToEditPage={this.goToEditPage}
+          goToCreationPage={this.goToCreationPage}
+          handleDeleteClick={this.handleDeleteClick} />
       </HomePageWrapper>
     )
   }
+}
+
+Home.defaultProps = {
+  articles: [],
 }
 
 Home.propTypes = {
