@@ -1,10 +1,12 @@
 import React from 'react'
-import Home from './pages/Home'
+import Routes from './routes'
+import HeaderComponent from './commonComponents/Header'
 
 function App () {
   return (
     <div className="App">
-      <Home />
+      <HeaderComponent />
+      <Routes />
     </div>
   )
 }

@@ -55,7 +55,7 @@ class ArticlesTable extends Component {
       <TableWrapper>
         <Button
           size="large"
-          type="primary"
+          type="dashed"
           onClick={goToCreationPage}
         >
           Add
@@ -73,7 +73,6 @@ class ArticlesTable extends Component {
             hideOnSinglePage: true,
             pageSize: 10,
           }} />
-        )}
       </TableWrapper>
     )
   }
