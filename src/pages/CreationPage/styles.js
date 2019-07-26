@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
-export const CreationPageWrapper = styled.div`
+export const EditPageWrapper = styled.div`
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -43,13 +44,11 @@ export const Span = styled.span`
 `
 
 export const InputWrapper = styled.div`
-  padding: 5px;
   width: 250px;
   min-width: 210px;
 `
 
 export const BodyInputWrapper = styled.div`
-  padding: 5px;
   width: 50%;
   min-width: 270px;
 `

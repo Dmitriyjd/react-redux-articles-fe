@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Button, Input } from 'antd'
 import {
-  CreationPageWrapper,
+  EditPageWrapper,
   PageTitle,
   Separator,
   InputGroup,
@@ -15,7 +15,7 @@ import TextArea from 'antd/lib/input/TextArea'
 class CreationPage extends PureComponent {
   render () {
     return (
-      <CreationPageWrapper>
+      <EditPageWrapper>
         <PageTitle>Create article</PageTitle>
         <Separator />
         <InputGroup>
@@ -33,7 +33,7 @@ class CreationPage extends PureComponent {
           </Span>
           <BodyInputWrapper>
             <TextArea
-              autosize={{ minRows: 8, maxRows: 45 }}
+              autosize={{ minRows: 8, maxRows: 20 }}
               size="large"
               placeholder="Enter body of your article" />
           </BodyInputWrapper>
@@ -52,7 +52,7 @@ class CreationPage extends PureComponent {
             Cancel
           </Button>
         </ButtonGroup>
-      </CreationPageWrapper>
+      </EditPageWrapper>
     )
   }
 }
