@@ -15,7 +15,7 @@ const Routes = () => {
           exact path="/create"
           component={CreationPage} />
         <Route
-          exact path="/edit"
+          exact path="/edit/:id"
           component={EditPage} />
 
         <Redirect to="/home" />
