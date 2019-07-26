@@ -2,20 +2,17 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Button } from 'antd'
 import ActionButtons from './styles'
+import { Link } from 'react-router-dom'
 
 class TableActionsButtons extends PureComponent {
-  handleClickEditBtn = () => {
-    const { goToEditPage, articleId } = this.props
-
-    goToEditPage(articleId)
-  };
-
   render () {
     const { articleId, handleDeleteClick } = this.props
     return (
       <ActionButtons>
-        <Button type="primary" onClick={this.handleClickEditBtn}>
-          Edit
+        <Button type="primary">
+          <Link to={`/edit/${this.props.articleId}`}>
+            Edit
+          </Link>
         </Button>
         <Button
           type="danger"
@@ -30,7 +27,6 @@ class TableActionsButtons extends PureComponent {
 }
 
 TableActionsButtons.propTypes = {
-  goToEditPage: PropTypes.func.isRequired,
   articleId: PropTypes.number.isRequired,
   handleDeleteClick: PropTypes.func.isRequired,
 }

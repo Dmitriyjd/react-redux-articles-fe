@@ -16,7 +16,7 @@ class ArticlesTable extends Component {
   }
 
   getColumns = () => {
-    const { goToEditPage, handleDeleteClick } = this.props
+    const { handleDeleteClick } = this.props
 
     return [
       {
@@ -35,7 +35,6 @@ class ArticlesTable extends Component {
         title: 'Actions',
         render: article => (
           <TableActionsButtons
-            goToEditPage={goToEditPage}
             articleId={article.id}
             handleDeleteClick={handleDeleteClick} />
         ),
@@ -55,7 +54,7 @@ class ArticlesTable extends Component {
       <TableWrapper>
         <Button
           size="large"
-          type="dashed"
+          type="primary"
           onClick={goToCreationPage}
         >
           Add
@@ -90,7 +89,6 @@ ArticlesTable.propTypes = {
       body: PropTypes.string,
     }),
   ).isRequired,
-  goToEditPage: PropTypes.func.isRequired,
   goToCreationPage: PropTypes.func.isRequired,
   handleDeleteClick: PropTypes.func.isRequired,
 }

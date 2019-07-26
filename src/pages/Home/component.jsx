@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import ReactRouterPropTypes from 'react-router-prop-types'
 import { HomePageWrapper } from './styles'
 import ArticlesTable from './ArticlesTable'
 import {
@@ -9,7 +10,16 @@ import {
 } from '../../store/actions/articles'
 
 class Home extends PureComponent {
+  goToCreationPage = () => {
+    this.props.history.push('/create')
+  }
+
+  handleDeleteClick = id => {
+    this.props.deleteArticle(id)
+  }
+
   componentDidMount () {
+    console.log('history', this.props.history)
     this.props.getArticles()
   }
 
@@ -18,7 +28,6 @@ class Home extends PureComponent {
       <HomePageWrapper>
         <ArticlesTable
           articles={this.props.articles}
-          goToEditPage={this.goToEditPage}
           goToCreationPage={this.goToCreationPage}
           handleDeleteClick={this.handleDeleteClick} />
       </HomePageWrapper>
@@ -44,7 +53,9 @@ Home.defaultProps = {
 }
 
 Home.propTypes = {
+  deleteArticle: PropTypes.func.isRequired,
   getArticles: PropTypes.func.isRequired,
+  history: ReactRouterPropTypes.history.isRequired,
   articles: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
