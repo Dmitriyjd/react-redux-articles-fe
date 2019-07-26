@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import ReactRouterPropTypes from 'react-router-prop-types'
 import { Button, Input } from 'antd'
 import {
   EditPageWrapper,
@@ -13,6 +14,10 @@ import {
 import TextArea from 'antd/lib/input/TextArea'
 
 class CreationPage extends PureComponent {
+  goToHomePage = () => {
+    this.props.history.push('/home')
+  }
+
   render () {
     return (
       <EditPageWrapper>
@@ -48,6 +53,7 @@ class CreationPage extends PureComponent {
           <Button
             size="large"
             type="default"
+            onClick={this.goToHomePage}
           >
             Cancel
           </Button>
@@ -55,6 +61,10 @@ class CreationPage extends PureComponent {
       </EditPageWrapper>
     )
   }
+}
+
+CreationPage.propTypes = {
+  history: ReactRouterPropTypes.history.isRequired,
 }
 
 export default CreationPage
