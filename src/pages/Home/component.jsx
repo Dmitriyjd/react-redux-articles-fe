@@ -5,7 +5,7 @@ import ReactRouterPropTypes from 'react-router-prop-types'
 import { HomePageWrapper } from './styles'
 import ArticlesTable from './ArticlesTable'
 import {
-  getArticles,
+  getArticlesPending,
   deleteArticle,
 } from '../../store/actions/articles'
 
@@ -43,7 +43,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getArticles: () => dispatch(getArticles()),
+    getArticles: () => dispatch(getArticlesPending()),
     deleteArticle: id => dispatch(deleteArticle(id)),
   }
 }

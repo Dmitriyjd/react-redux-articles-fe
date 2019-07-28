@@ -1,6 +1,7 @@
 import {
   CREATE_ARTICLE,
-  GET_ARTICLES,
+  GET_ARTICLES_SUCCESS,
+  GET_ARTICLES_FAILED,
   EDIT_ARTICLE,
   DELETE_ARTICLE,
 } from '../constants/actions'
@@ -8,11 +9,13 @@ import {
 const initialState = { articles: [] }
 function counter (state = initialState, action) {
   switch (action.type) {
-    case GET_ARTICLES:
+    case GET_ARTICLES_SUCCESS:
       return {
         ...state,
         articles: action.payload,
       }
+    case GET_ARTICLES_FAILED:
+      return state
     case CREATE_ARTICLE:
       return {
         ...state,
