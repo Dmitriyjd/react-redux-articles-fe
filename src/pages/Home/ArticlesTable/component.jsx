@@ -16,12 +16,12 @@ class ArticlesTable extends Component {
   }
 
   getColumns = () => {
-    const { handleDeleteClick } = this.props
+    const { deleteArticle } = this.props
 
     return [
       {
         title: 'id',
-        dataIndex: 'id',
+        dataIndex: '_id',
       },
       {
         title: 'Title',
@@ -35,8 +35,7 @@ class ArticlesTable extends Component {
         title: 'Actions',
         render: article => (
           <TableActionsButtons
-            articleId={article.id}
-            handleDeleteClick={handleDeleteClick} />
+            articleId={article._id} />
         ),
       },
     ]
@@ -47,7 +46,6 @@ class ArticlesTable extends Component {
       articles,
       goToCreationPage,
     } = this.props
-
     const columns = this.getColumns()
 
     return (
@@ -65,7 +63,7 @@ class ArticlesTable extends Component {
         <Table
           columns={columns}
           dataSource={articles}
-          rowKey="id"
+          rowKey="_id"
           pagination={{
             defaultCurrent: 1,
             total: articles.length,
@@ -90,7 +88,6 @@ ArticlesTable.propTypes = {
     }),
   ).isRequired,
   goToCreationPage: PropTypes.func.isRequired,
-  handleDeleteClick: PropTypes.func.isRequired,
 }
 
 export default ArticlesTable

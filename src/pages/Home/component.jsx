@@ -6,7 +6,6 @@ import { HomePageWrapper } from './styles'
 import ArticlesTable from './ArticlesTable'
 import {
   getArticlesPending,
-  deleteArticle,
 } from '../../store/actions/articles'
 
 class Home extends PureComponent {
@@ -14,12 +13,7 @@ class Home extends PureComponent {
     this.props.history.push('/create')
   }
 
-  handleDeleteClick = id => {
-    this.props.deleteArticle(id)
-  }
-
   componentDidMount () {
-    console.log('history', this.props.history)
     this.props.getArticles()
   }
 
@@ -28,8 +22,7 @@ class Home extends PureComponent {
       <HomePageWrapper>
         <ArticlesTable
           articles={this.props.articles}
-          goToCreationPage={this.goToCreationPage}
-          handleDeleteClick={this.handleDeleteClick} />
+          goToCreationPage={this.goToCreationPage} />
       </HomePageWrapper>
     )
   }
@@ -44,7 +37,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getArticles: () => dispatch(getArticlesPending()),
-    deleteArticle: id => dispatch(deleteArticle(id)),
   }
 }
 
@@ -53,7 +45,6 @@ Home.defaultProps = {
 }
 
 Home.propTypes = {
-  deleteArticle: PropTypes.func.isRequired,
   getArticles: PropTypes.func.isRequired,
   history: ReactRouterPropTypes.history.isRequired,
   articles: PropTypes.arrayOf(

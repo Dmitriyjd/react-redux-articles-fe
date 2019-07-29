@@ -1,7 +1,12 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 import ReactRouterPropTypes from 'react-router-prop-types'
+import {
+  getArticleByIdPending,
+  editArticlePending,
+} from '../../store/actions/articles'
 import {
   BodyInputWrapper, ButtonGroup,
   EditPageWrapper,
@@ -22,10 +27,13 @@ class EditPage extends PureComponent {
   componentDidMount () {
     const locationItems = this.props.location.pathname.split('/')
     const id = locationItems[locationItems.length - 1]
+    console.log('id', id)
     this.props.getArticleById(id)
+    console.log('component', this.props.article)
   }
 
   render () {
+    console.log('render', this.props.article)
     const locationItems = this.props.location.pathname.split('/')
     const id = locationItems[locationItems.length - 1]
 
@@ -37,6 +45,7 @@ class EditPage extends PureComponent {
           <Span>Title:</Span>
           <InputWrapper>
             <Input
+              defaultValue={this.state.title}
               size="large"
               placeholder="Enter title of your article"
               required />
@@ -48,6 +57,7 @@ class EditPage extends PureComponent {
           </Span>
           <BodyInputWrapper>
             <TextArea
+              defaultValue={this.props.article.body}
               autosize={{ minRows: 8, maxRows: 20 }}
               size="large"
               placeholder="Enter body of your article" />
@@ -74,6 +84,26 @@ class EditPage extends PureComponent {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    article: state.articles.article,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getArticleById: id => dispatch(getArticleByIdPending(id)),
+    updateArticleById: id => dispatch(editArticlePending(id)),
+  }
+}
+
+EditPage.defaultProps = {
+  article: PropTypes.shape({
+    title: '',
+    body: '',
+  }),
+}
+
 EditPage.propTypes = {
   history: ReactRouterPropTypes.history.isRequired,
   article: PropTypes.shape({
@@ -84,4 +114,4 @@ EditPage.propTypes = {
   updateArticleById: PropTypes.func.isRequired,
 }
 
-export default withRouter(EditPage)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EditPage))

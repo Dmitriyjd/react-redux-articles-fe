@@ -1,12 +1,16 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { Button } from 'antd'
 import ActionButtons from './styles'
+import { deleteArticlePending } from '../../../store/actions/articles'
 import { Link } from 'react-router-dom'
 
 class TableActionsButtons extends PureComponent {
+
   render () {
-    const { articleId, handleDeleteClick } = this.props
+    const { articleId } = this.props
+    console.log('tableActionButtonsProps', this.props.articleId)
     return (
       <ActionButtons>
         <Button type="primary">
@@ -17,7 +21,7 @@ class TableActionsButtons extends PureComponent {
         <Button
           type="danger"
           data-id={articleId}
-          onClick={handleDeleteClick}
+          onClick={() => this.props.deleteArticle(articleId)}
         >
           Delete
         </Button>
@@ -26,9 +30,15 @@ class TableActionsButtons extends PureComponent {
   }
 }
 
-TableActionsButtons.propTypes = {
-  articleId: PropTypes.number.isRequired,
-  handleDeleteClick: PropTypes.func.isRequired,
+const mapDispatchToProps = dispatch => {
+  return {
+    deleteArticle: id => dispatch(deleteArticlePending(id)),
+  }
 }
 
-export default TableActionsButtons
+TableActionsButtons.propTypes = {
+  articleId: PropTypes.string.isRequired,
+  deleteArticle: PropTypes.func.isRequired,
+}
+
+export default connect(null, mapDispatchToProps)(TableActionsButtons)
