@@ -27,11 +27,10 @@ class CreationPage extends PureComponent {
     this.setState(() => ({
       [name]: value,
     }))
-    console.log(this.state)
   }
 
   onClick = () => {
-    this.props.createArticlesPending(this.state)
+    this.props.history.replace('/home')
   }
 
   render () {

@@ -20,6 +20,8 @@ import { Button, Input } from 'antd'
 import TextArea from 'antd/lib/input/TextArea'
 
 class EditPage extends PureComponent {
+  state = {}
+
   goToHomePage = () => {
     this.props.history.push('/home')
   }
@@ -27,13 +29,27 @@ class EditPage extends PureComponent {
   componentDidMount () {
     const locationItems = this.props.location.pathname.split('/')
     const id = locationItems[locationItems.length - 1]
-    console.log('id', id)
     this.props.getArticleById(id)
-    console.log('component', this.props.article)
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.article.title !== this.props.article.title) {
+      this.setState({ title: nextProps.article.title });
+    }
+
+    if (nextProps.article.body !== this.props.article.body) {
+      this.setState({ body: nextProps.article.body });
+    }
+  }
+
+  onChange = event => {
+    const { name, value } = event.target
+    this.setState(() => ({
+      [name]: value,
+    }))
   }
 
   render () {
-    console.log('render', this.props.article)
     const locationItems = this.props.location.pathname.split('/')
     const id = locationItems[locationItems.length - 1]
 
@@ -43,11 +59,13 @@ class EditPage extends PureComponent {
         <Separator />
         <InputGroup>
           <Span>Title:</Span>
-          <InputWrapper>
+          <InputWrapper key={this.props.article.title}>
             <Input
-              defaultValue={this.state.title}
+              defaultValue={this.props.article.title}
+              name="title"
               size="large"
               placeholder="Enter title of your article"
+              onChange={this.onChange}
               required />
           </InputWrapper>
         </InputGroup>
@@ -55,19 +73,21 @@ class EditPage extends PureComponent {
           <Span>
             Body:
           </Span>
-          <BodyInputWrapper>
+          <BodyInputWrapper key={this.props.article.body}>
             <TextArea
               defaultValue={this.props.article.body}
+              name="body"
               autosize={{ minRows: 8, maxRows: 20 }}
               size="large"
-              placeholder="Enter body of your article" />
+              placeholder="Enter body of your article"
+              onChange={this.onChange} />
           </BodyInputWrapper>
         </InputGroup>
         <ButtonGroup>
           <Button
             size="large"
             type="primary"
-            onClick={this.props.updateArticleById(id)}
+            onClick={() => this.props.updateArticleById(id, this.state)}
           >
             Apply
           </Button>
@@ -93,22 +113,22 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getArticleById: id => dispatch(getArticleByIdPending(id)),
-    updateArticleById: id => dispatch(editArticlePending(id)),
+    updateArticleById: (id, payload) => dispatch(editArticlePending(id, payload)),
   }
 }
 
 EditPage.defaultProps = {
-  article: PropTypes.shape({
+  article: {
     title: '',
     body: '',
-  }),
+  },
 }
 
 EditPage.propTypes = {
   history: ReactRouterPropTypes.history.isRequired,
   article: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    body: PropTypes.string,
+    body: PropTypes.string.isRequired,
   }),
   getArticleById: PropTypes.func.isRequired,
   updateArticleById: PropTypes.func.isRequired,

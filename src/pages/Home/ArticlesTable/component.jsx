@@ -16,8 +16,6 @@ class ArticlesTable extends Component {
   }
 
   getColumns = () => {
-    const { deleteArticle } = this.props
-
     return [
       {
         title: 'id',

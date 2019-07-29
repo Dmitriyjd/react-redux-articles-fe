@@ -30,7 +30,7 @@ export const createArticlesSuccess = () => ({ type: CREATE_ARTICLE_SUCCESS })
 export const createArticlesFailed = () => ({ type: CREATE_ARTICLE_FAILED })
 
 // edit article
-export const editArticlePending = () => ({ type: EDIT_ARTICLE_PENDING })
+export const editArticlePending = (id, payload) => ({ type: EDIT_ARTICLE_PENDING, id, payload })
 export const editArticleSuccess = () => ({ type: EDIT_ARTICLE_SUCCESS })
 export const editArticleFailed = () => ({ type: EDIT_ARTICLE_FAILED })
 

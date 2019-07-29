@@ -10,7 +10,6 @@ class TableActionsButtons extends PureComponent {
 
   render () {
     const { articleId } = this.props
-    console.log('tableActionButtonsProps', this.props.articleId)
     return (
       <ActionButtons>
         <Button type="primary">

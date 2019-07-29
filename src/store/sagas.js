@@ -13,12 +13,9 @@ const getArticlesRequest = function * () {
 }
 
 const getArticleByIdRequest = function * (action) {
-  console.log('action', action)
   const { id } = action
-  console.log('saga', id)
   try {
     const response = yield axios.get(`http://localhost:8080/api/articles/${id}`)
-    console.log('response', response.data)
     yield put(actionCreator.getArticleByIdSuccess(response.data))
   } catch (error) {
     yield put(actionCreator.getArticleByIdFailed())
@@ -36,14 +33,21 @@ const createArticleRequest = function * (action) {
 
 const deleteArticleRequest = function * (action) {
   const { id } = action
-  console.log('action', action)
   try {
-    console.log('try')
     const response = yield axios.delete(`http://localhost:8080/api/articles/${id}`)
-    console.log('after deleting')
     yield put(actionCreator.deleteArticleSuccess(response.data.data))
   } catch (error) {
     yield put(actionCreator.deleteArticleFailed())
+  }
+}
+
+const updateArticleRequest = function * (action) {
+  const { id, payload } = action
+  try {
+    const response = yield axios.put(`http://localhost:8080/api/articles/${id}`, payload)
+    yield put(actionCreator.editArticleSuccess(response.data))
+  } catch (error) {
+    yield put(actionCreator.editArticleFailed())
   }
 }
 
@@ -52,6 +56,7 @@ const DataWatcher = function * () {
   yield takeEvery(actionTypes.DELETE_ARTICLE_PENDING, deleteArticleRequest)
   yield takeEvery(actionTypes.CREATE_ARTICLE_PENDING, createArticleRequest)
   yield takeEvery(actionTypes.GET_ARTICLE_BY_ID_PENDING, getArticleByIdRequest)
+  yield takeEvery(actionTypes.EDIT_ARTICLE_PENDING, updateArticleRequest)
 }
 
 export default DataWatcher
