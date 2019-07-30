@@ -8,7 +8,8 @@ import {
   editArticlePending,
 } from '../../store/actions/articles'
 import {
-  BodyInputWrapper, ButtonGroup,
+  BodyInputWrapper,
+  ButtonGroup,
   EditPageWrapper,
   InputGroup,
   InputWrapper,
@@ -34,11 +35,11 @@ class EditPage extends PureComponent {
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.article.title !== this.props.article.title) {
-      this.setState({ title: nextProps.article.title });
+      this.setState({ title: nextProps.article.title })
     }
 
     if (nextProps.article.body !== this.props.article.body) {
-      this.setState({ body: nextProps.article.body });
+      this.setState({ body: nextProps.article.body })
     }
   }
 
@@ -125,6 +126,7 @@ EditPage.defaultProps = {
 }
 
 EditPage.propTypes = {
+  location: ReactRouterPropTypes.location.isRequired,
   history: ReactRouterPropTypes.history.isRequired,
   article: PropTypes.shape({
     title: PropTypes.string.isRequired,

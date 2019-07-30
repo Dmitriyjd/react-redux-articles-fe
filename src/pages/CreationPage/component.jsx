@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import ReactRouterPropTypes from 'react-router-prop-types'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createArticlesPending } from '../../store/actions/articles'
 import { Button, Input } from 'antd'
@@ -18,10 +19,6 @@ import TextArea from 'antd/lib/input/TextArea'
 class CreationPage extends PureComponent {
   state = {}
 
-  goToHomePage = () => {
-    this.props.history.push('/home')
-  }
-
   onChange = event => {
     const { name, value } = event.target
     this.setState(() => ({
@@ -29,7 +26,7 @@ class CreationPage extends PureComponent {
     }))
   }
 
-  onClick = () => {
+  goToHomePage = () => {
     this.props.history.replace('/home')
   }
 
@@ -73,7 +70,7 @@ class CreationPage extends PureComponent {
           <Button
             size="large"
             type="default"
-            onClick={this.onClick}
+            onClick={this.goToHomePage}
           >
             Cancel
           </Button>
@@ -90,6 +87,7 @@ const mapDispatchToProps = dispatch => {
 }
 
 CreationPage.propTypes = {
+  createArticlesPending: PropTypes.func.isRequired,
   history: ReactRouterPropTypes.history.isRequired,
 }
 

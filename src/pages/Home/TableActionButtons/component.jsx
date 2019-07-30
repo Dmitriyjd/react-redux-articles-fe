@@ -7,7 +7,6 @@ import { deleteArticlePending } from '../../../store/actions/articles'
 import { Link } from 'react-router-dom'
 
 class TableActionsButtons extends PureComponent {
-
   render () {
     const { articleId } = this.props
     return (
