@@ -30,6 +30,10 @@ class CreationPage extends PureComponent {
     this.props.history.replace('/home')
   }
 
+  handleButtonClick = () => () => {
+    this.props.createArticlesPending(this.state)
+  }
+
   render () {
     return (
       <EditPageWrapper>
@@ -63,7 +67,7 @@ class CreationPage extends PureComponent {
           <Button
             size="large"
             type="primary"
-            onClick={() => this.props.createArticlesPending(this.state)}
+            onClick={this.handleButtonClick}
           >
             Add
           </Button>

@@ -50,6 +50,10 @@ class EditPage extends PureComponent {
     }))
   }
 
+  handleButtonClick = id => () => {
+    this.props.updateArticleById(id, this.state)
+  }
+
   render () {
     const locationItems = this.props.location.pathname.split('/')
     const id = locationItems[locationItems.length - 1]
@@ -88,7 +92,7 @@ class EditPage extends PureComponent {
           <Button
             size="large"
             type="primary"
-            onClick={() => this.props.updateArticleById(id, this.state)}
+            onClick={this.handleButtonClick(id)}
           >
             Apply
           </Button>
