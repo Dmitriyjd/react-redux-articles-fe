@@ -67,7 +67,7 @@ class CreationPage extends PureComponent {
           <Button
             size="large"
             type="primary"
-            onClick={this.handleButtonClick}
+            onClick={this.handleButtonClick()}
           >
             Add
           </Button>

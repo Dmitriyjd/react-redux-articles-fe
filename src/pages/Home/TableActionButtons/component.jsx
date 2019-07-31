@@ -7,6 +7,10 @@ import { deleteArticlePending } from '../../../store/actions/articles'
 import { Link } from 'react-router-dom'
 
 class TableActionsButtons extends PureComponent {
+  handleButtonClick = articleId => () => {
+    this.props.deleteArticle(articleId)
+  }
+
   render () {
     const { articleId } = this.props
     return (
@@ -19,7 +23,7 @@ class TableActionsButtons extends PureComponent {
         <Button
           type="danger"
           data-id={articleId}
-          onClick={() => this.props.deleteArticle(articleId)}
+          onClick={this.handleButtonClick}
         >
           Delete
         </Button>

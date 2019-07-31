@@ -21,7 +21,10 @@ import { Button, Input } from 'antd'
 import TextArea from 'antd/lib/input/TextArea'
 
 class EditPage extends PureComponent {
-  state = {}
+  state = {
+    title: '',
+    body: '',
+  }
 
   goToHomePage = () => {
     this.props.history.push('/home')
@@ -31,16 +34,6 @@ class EditPage extends PureComponent {
     const locationItems = this.props.location.pathname.split('/')
     const id = locationItems[locationItems.length - 1]
     this.props.getArticleById(id)
-  }
-
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.article.title !== this.props.article.title) {
-      this.setState({ title: nextProps.article.title })
-    }
-
-    if (nextProps.article.body !== this.props.article.body) {
-      this.setState({ body: nextProps.article.body })
-    }
   }
 
   onChange = event => {

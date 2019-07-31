@@ -6,7 +6,7 @@ import * as actionTypes from './constants/actions'
 const getArticlesRequest = function * () {
   try {
     const response = yield axios.get('http://localhost:8080/api/articles')
-    yield put(actionCreator.getArticlesSuccess(response.data.data))
+    yield put(actionCreator.getArticlesSuccess(response.data))
   } catch (error) {
     yield put(actionCreator.getArticlesFailed())
   }
@@ -35,7 +35,7 @@ const deleteArticleRequest = function * (action) {
   const { id } = action
   try {
     const response = yield axios.delete(`http://localhost:8080/api/articles/${id}`)
-    yield put(actionCreator.deleteArticleSuccess(response.data.data))
+    yield put(actionCreator.deleteArticleSuccess(response.data))
   } catch (error) {
     yield put(actionCreator.deleteArticleFailed())
   }
