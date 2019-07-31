@@ -1,5 +1,8 @@
 import React, { PureComponent } from 'react'
 import ReactRouterPropTypes from 'react-router-prop-types'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { createArticlesPending } from '../../store/actions/articles'
 import { Button, Input } from 'antd'
 import {
   EditPageWrapper,
@@ -14,8 +17,21 @@ import {
 import TextArea from 'antd/lib/input/TextArea'
 
 class CreationPage extends PureComponent {
+  state = {}
+
+  onChange = event => {
+    const { name, value } = event.target
+    this.setState(() => ({
+      [name]: value,
+    }))
+  }
+
   goToHomePage = () => {
-    this.props.history.push('/home')
+    this.props.history.replace('/home')
+  }
+
+  handleButtonClick = () => () => {
+    this.props.createArticlesPending(this.state)
   }
 
   render () {
@@ -27,8 +43,10 @@ class CreationPage extends PureComponent {
           <Span>Title:</Span>
           <InputWrapper>
             <Input
+              name="title"
               size="large"
               placeholder="Enter title of your article"
+              onChange={this.onChange}
               required />
           </InputWrapper>
         </InputGroup>
@@ -38,15 +56,18 @@ class CreationPage extends PureComponent {
           </Span>
           <BodyInputWrapper>
             <TextArea
+              name="body"
               autosize={{ minRows: 8, maxRows: 20 }}
               size="large"
-              placeholder="Enter body of your article" />
+              placeholder="Enter body of your article"
+              onChange={this.onChange} />
           </BodyInputWrapper>
         </InputGroup>
         <ButtonGroup>
           <Button
             size="large"
             type="primary"
+            onClick={this.handleButtonClick()}
           >
             Add
           </Button>
@@ -63,8 +84,15 @@ class CreationPage extends PureComponent {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    createArticlesPending: payload => dispatch(createArticlesPending(payload)),
+  }
+}
+
 CreationPage.propTypes = {
+  createArticlesPending: PropTypes.func.isRequired,
   history: ReactRouterPropTypes.history.isRequired,
 }
 
-export default CreationPage
+export default connect(null, mapDispatchToProps)(CreationPage)
